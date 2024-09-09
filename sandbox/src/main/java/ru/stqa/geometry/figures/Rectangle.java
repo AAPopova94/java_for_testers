@@ -2,7 +2,8 @@ package ru.stqa.geometry.figures;
 
 public class Rectangle {
     public static void printRectagleArea(double a, double b) {
-        System.out.println("площадь прямоугольника со сторонами " + a + " и " + b +" = " + rectagleArea(a, b));
+        var text = String.format("Площадь прямоугольника со сторонами %f + %f = %f", a, b, rectagleArea(a, b));
+        System.out.println(text);
     }
 
     private static double rectagleArea(double a, double b) {

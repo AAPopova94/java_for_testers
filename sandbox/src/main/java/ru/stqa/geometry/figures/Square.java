@@ -3,7 +3,8 @@ package ru.stqa.geometry.figures;
 public class Square
 {
     public static void printSquareArea(double a) {
-       System.out.println("площадь квадрата со стороной " + a + " = " + squareArea(a));
+        String text = String.format("площадь квадрата со стороной %f = %f ", a, squareArea(a));
+        System.out.println(text);
    }
 
     private static double squareArea(double a) {
