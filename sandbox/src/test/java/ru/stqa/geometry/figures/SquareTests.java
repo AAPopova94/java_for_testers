@@ -7,12 +7,14 @@ public class SquareTests {
 
     @Test
     void canCanculateArea() {
-        var result = Square.Area(5.0);
+        var s = new Square(5.0);// чтобы это работало - описали две строки в файле Square
+        var result = s.Area(); // чтобы создать функцию, чтоб это заработало: option+enter => create method
         Assertions.assertEquals(25.0, result);
     }
 
     @Test
     void canCanculatePerimeter(){
-        Assertions.assertEquals(20.0, Square.perimeter(5.0));
+
+        Assertions.assertEquals(20.0,new Square(5.0).perimeter());
     }
 }
