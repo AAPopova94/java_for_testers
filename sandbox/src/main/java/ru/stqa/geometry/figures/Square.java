@@ -1,13 +1,13 @@
 package ru.stqa.geometry.figures;
 
-public class Square
-{////// две нижние фунции private  double side и  public  Square(double side), чтобы заработал кусок в тестах
-    private  double side; //тут нужно явно указывать какой тип данных будем передавать (дробное число стороны квадрата),
-    //тут private, потому что это один раз внутри класса юзаем, ниже
+public record Square(double side) {
 
-    public  Square(double side) {
-        this.side = side; //  первый side - это свойство объекта (выше), второй - параметр вызываемой фунции (сторона)
-    }//тут паблик, потому что будем из другого файла вызывать ,, this.side - типа это свойство
+    public Square{
+        if(side < 0){
+            throw new IllegalArgumentException("Square side should be non-negative");
+        }
+
+    }
 
     public static void printSquareArea(Square s) {
         String text = String.format("площадь квадрата со стороной %f = %f ", s.side, s.Area());

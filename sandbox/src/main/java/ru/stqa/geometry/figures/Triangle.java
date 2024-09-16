@@ -1,16 +1,16 @@
 package ru.stqa.geometry.figures;
 
-public class Triangle {
+public record Triangle (double sideA, double sideB, double sideC) {
 
-    private double sideA;
-    private double sideB;
-    private double sideC;
-
-    public Triangle(double sideA, double sideB, double sideC){
-        this.sideA = sideA;
-        this.sideB = sideB;
-        this.sideC = sideC;
+    public Triangle{
+     if(sideA <0 || sideB < 0 || sideC <0){
+         throw new IllegalArgumentException("Triangle side should be non-negative");
+     }
+        if(sideA + sideB == sideC|| sideC + sideB == sideA ||sideA + sideC == sideB){
+            throw new IllegalArgumentException("The sum of two sides of a triangle cannot be equal to the third side");
+        }
     }
+
 
     public static void printTriangelArea(Triangle tr) {
         String text = String.format("площадь треугольника со сторонами %f, %f, %f = %f ", tr.sideA, tr.sideB, tr.sideC, tr.Area());

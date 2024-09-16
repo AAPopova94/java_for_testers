@@ -7,16 +7,36 @@ public class TriangleTests {
 
 
     @Test
-    void canCanculateArea(){
-        var t = new Triangle(3.0,4.0,5.0);
+    void canCanculateArea() {
+        var t = new Triangle(3.0, 4.0, 5.0);
         var result = t.Area();
         Assertions.assertEquals(6.0, result);
     }
 
     @Test
-    void canCanculatePerimeter(){
+    void canCanculatePerimeter() {
 
-        Assertions.assertEquals(12.0 , new Triangle(3.0,4.0,5.0).perimeter());
+        Assertions.assertEquals(12.0, new Triangle(3.0, 4.0, 5.0).perimeter());
 
+    }
+
+    @Test
+    void CannotCreateTriangleWithNegativeSide() {
+        try {
+            new Triangle(-5.0, 4.0, 3.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            //ок
+        }
+    }
+
+    @Test
+    void CannotCreateTriangleWithUnfaithfulSide() {
+        try {
+            new Triangle(6.0, 3.0, 3.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            //ок
+        }
     }
 }
