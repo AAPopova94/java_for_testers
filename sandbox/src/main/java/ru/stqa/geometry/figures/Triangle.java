@@ -8,7 +8,7 @@ public record Triangle (double sideA, double sideB, double sideC) {
      if(sideA <0 || sideB < 0 || sideC <0){
          throw new IllegalArgumentException("Triangle side should be non-negative");
      }
-        if(sideA + sideB == sideC|| sideC + sideB == sideA ||sideA + sideC == sideB){
+        if(sideA + sideB <= sideC|| sideC + sideB <= sideA ||sideA + sideC <= sideB){
             throw new IllegalArgumentException("The sum of two sides of a triangle cannot be equal to the third side");
         }
     }
