@@ -25,9 +25,18 @@ public class GroupCreationTests {
         }
     }
 
+    private boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return false;
+        } catch (NoSuchElementException exception) {
+            return true;
+        }
+    }
+
     @Test
     public void canCreateGroup() {
-        if (!isElementPresent(By.name("new"))) {
+        if (! isElementPresent(By.name("new"))) {
             driver.findElement(By.linkText("groups")).click();
         }
         driver.findElement(By.name("new")).click();
@@ -40,20 +49,10 @@ public class GroupCreationTests {
         driver.findElement(By.name("submit")).click();
     }
 
-    private boolean isElementPresent(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException exception) {
-            return false;
-        }
-    }
 
     @Test
     public void canCreateGroupWithEmptyName() {
-       if (!isElementPresent(By.name("new"))) {
-            driver.findElement(By.linkText("groups")).click();
-        }
+        driver.findElement(By.linkText("groups")).click();
         driver.findElement(By.name("new")).click();
         driver.findElement(By.name("group_name")).click();
         driver.findElement(By.name("group_name")).sendKeys("");
