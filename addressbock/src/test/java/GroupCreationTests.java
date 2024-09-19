@@ -28,9 +28,9 @@ public class GroupCreationTests {
     private boolean isElementPresent(By locator) {
         try {
             driver.findElement(locator);
-            return false;
-        } catch (NoSuchElementException exception) {
             return true;
+        } catch (NoSuchElementException exception) {
+            return false;
         }
     }
 
