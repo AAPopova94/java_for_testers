@@ -39,4 +39,14 @@ public class GroupHelper {
         manager.driver.findElement(By.name("group_footer")).sendKeys(group.footer());
         manager.driver.findElement(By.name("submit")).click();
     }
+
+    public void modifyGroup(GroupData modifiedGroup) {
+        OpenGroupPage();
+       // selectGroup();
+        //initGroupModification();
+        //fillGroupForm(modifiedGroup);
+        //submitGroupModification();
+       // returnToGroupsPage();
+
+    }
 }
