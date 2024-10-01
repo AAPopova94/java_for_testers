@@ -44,12 +44,5 @@ public class ApplicationManager {
       }
     }
 
-    public boolean isElementPresentContact(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException exception) {
-            return false;
-        }
-   }
+
 }

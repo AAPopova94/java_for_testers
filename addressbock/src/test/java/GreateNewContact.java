@@ -13,7 +13,7 @@ public class GreateNewContact extends TestBase {
   }
 
   private void createContact() {
-     if (!app.isElementPresentContact(By.name("firstname"))){
+     if (!app.isElementPresent(By.name("firstname"))){
          app.driver.findElement(By.linkText("add new")).click();//- то что сохраняет изменения
      }
     app.driver.findElement(By.name("firstname")).click();app.driver.findElement(By.name("firstname")).sendKeys("Anna");
