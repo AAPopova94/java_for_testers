@@ -8,10 +8,10 @@ public class DeletecontactTest extends TestBase {
 
   @Test
   public void deletecontact() {
-    if (!app.isContactPresent()){
-      app.createContact(new ContactData("Jon", "travolta", "milk", "900000000","Bell"));
+    if (!app.contacts().isContactPresent()){
+      app.contacts().createContact(new ContactData("Jon", "travolta", "milk", "900000000","Bell"));
     }
-    app.removeContact();
+    app.contacts().removeContact();
   }
 
 
