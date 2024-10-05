@@ -3,23 +3,19 @@ package manager;
 import Model.ContactData;
 import org.openqa.selenium.By;
 
-public class ContactHelper {
+public class ContactHelper extends  HelperBase{
 
-    private final ApplicationManager manager;
 
 
     public ContactHelper(ApplicationManager manager){
-        this.manager = manager;
+        super(manager);
     }
 
 
     public void createContact(ContactData contact) {
-      if (!manager.isElementPresent(By.name("firstname"))){
-          manager.driver.findElement(By.linkText("add new")).click();//- то что сохраняет изменения
-       }
+        openPageCreateContact();
         fillConactForm(contact);
-        manager.driver.findElement(By.xpath("(//input[@name=\'submit\'])[2]")).click();
-        //manager.driver.get("http://localhost/addressbook/index.php");
+        clickForCreate();
         returnToContactPage();
 
     }
@@ -29,42 +25,58 @@ public class ContactHelper {
     }
 
     public void removeContact() {
-        manager.driver.findElement(By.name("selected[]")).click();
-        manager.driver.findElement(By.id("content")).click();
-        manager.driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
+        deleteContact();
     }
-
     public void modifyContact(ContactData modifiedContact) {
-       // OpenContactPage();
+        // OpenContactPage();
         initcontactModification();
         fillConactForm(modifiedContact);
         submitContactModification();
         returnToContactPage();
     }
 
+
+    /////отсюда - вспомогашки
+
+    private void openPageCreateContact() {
+        if (!manager.isElementPresent(By.name("firstname"))){
+            click(By.linkText("add new"));
+        }
+    }
+
+
+    private void clickForCreate() {
+        click(By.xpath("(//input[@name=\'submit\'])[2]"));
+    }
+
+
+    private void deleteContact() {
+        click(By.name("selected[]"));
+        click(By.id("content"));
+        click(By.xpath("//input[@value=\'Delete\']"));
+    }
+
+
     private void returnToContactPage() {
-        manager.driver.findElement(By.linkText("home page")).click();//тут могут быть проблемки
+        click(By.linkText("home page"));
 
     }
 
     private void submitContactModification() {
-        manager.driver.findElement(By.name("update")).click();
+        click(By.name("update"));
     }
 
     private void fillConactForm(ContactData contact) {
-        manager.driver.findElement(By.name("firstname")).click();
-        manager.driver.findElement(By.name("firstname")).sendKeys(contact.firstname());
-        manager.driver.findElement(By.name("middlename")).click();
-        manager.driver.findElement(By.name("middlename")).sendKeys(contact.middlename());
-        manager.driver.findElement(By.name("lastname")).click();
-        manager.driver.findElement(By.name("lastname")).sendKeys(contact.lastname());
-        manager.driver.findElement(By.name("nickname")).click();
-        manager.driver.findElement(By.name("nickname")).sendKeys(contact.nickname());
-        manager.driver.findElement(By.name("mobile")).click();
-        manager.driver.findElement(By.name("mobile")).sendKeys(contact.mobile());
+        type(By.name("firstname"), contact.firstname());
+        type(By.name("middlename"), contact.middlename());
+        type(By.name("lastname"), contact.lastname());
+        type(By.name("nickname"), contact.nickname());
+        type(By.name("mobile"), contact.mobile());
     }
 
+
     private void initcontactModification() {
-        manager.driver.findElement(By.xpath("//img[@alt='Edit']")).click();//тут могут быть проблемки
+        click(By.xpath("//img[@alt='Edit']"));
     }
+
 }

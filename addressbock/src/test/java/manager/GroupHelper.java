@@ -3,16 +3,15 @@ package manager;
 import Model.GroupData;
 import org.openqa.selenium.By;
 
-public class GroupHelper {
-    private final ApplicationManager manager;
+public class GroupHelper extends HelperBase{
 
     public GroupHelper(ApplicationManager manager){
-        this.manager = manager;
+        super(manager);
     }
 
     public void OpenGroupPage() {
         if (! manager.isElementPresent(By.name("new"))) {
-            manager.driver.findElement(By.linkText("groups")).click();
+            click(By.linkText("groups"));
         }
     }
 
@@ -23,18 +22,17 @@ public class GroupHelper {
 
     public void RemoveGroup() {
         OpenGroupPage();
-        manager.driver.findElement(By.linkText("groups")).click();
         selectGroup();
-        manager.driver.findElement(By.name("delete")).click();
+        deleteGroup();
         returnToGroupsPage();
 
     }
 
     public void CreateGroup(GroupData group) {
         OpenGroupPage();
-        manager.driver.findElement(By.name("new")).click();
+        initGroupCreation();
         fillGroupForm(group);
-        manager.driver.findElement(By.name("submit")).click();
+        submitGroupCreation();
         returnToGroupsPage();
     }
 
@@ -47,30 +45,43 @@ public class GroupHelper {
         returnToGroupsPage();
 
     }
+///////отсюда - вспомогашки
+    private void deleteGroup() {
+        click(By.name("delete"));
+    }
+
+
+
+    private void submitGroupCreation() {
+        click(By.name("submit"));
+    }
+
+    private void initGroupCreation() {
+        click(By.name("new"));
+    }
+
+
 
     private void returnToGroupsPage() {
-        manager.driver.findElement(By.linkText("group page")).click();//тут могут быть проблемки
+        click(By.linkText("group page"));//тут могут быть проблемки
     }
 
     private void submitGroupModification() {
-        manager.driver.findElement(By.name("update")).click();
+        click(By.name("update"));
     }
 
     private void fillGroupForm(GroupData group) {
-        manager.driver.findElement(By.name("group_name")).click();
-        manager.driver.findElement(By.name("group_name")).sendKeys(group.name());
-        manager.driver.findElement(By.name("group_header")).click();
-        manager.driver.findElement(By.name("group_header")).sendKeys(group.header());
-        manager.driver.findElement(By.name("group_footer")).click();
-        manager.driver.findElement(By.name("group_footer")).sendKeys(group.footer());
+        type(By.name("group_name"), group.name());
+        type(By.name("group_header"), group.header());
+        type(By.name("group_footer"), group.footer());
     }
 
     private void initGroupModification() {
-        manager.driver.findElement(By.name("edit")).click();
+        click(By.name("edit"));
     }
 
     private void selectGroup() {
-        manager.driver.findElement(By.name("selected[]")).click();
+        click(By.name("selected[]"));
 
     }
 }
