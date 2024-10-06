@@ -20,13 +20,15 @@ public class ContactHelper extends  HelperBase{
 
     }
 
-    public boolean isContactPresent() {
-      return manager.isElementPresent(By.name("selected[]"));
-    }
-
     public void removeContact() {
+        chooseContact();
         deleteContact();
     }
+
+    private void chooseContact() {
+        click(By.name("selected[]"));
+    }
+
     public void modifyContact(ContactData modifiedContact) {
         // OpenContactPage();
         initcontactModification();
@@ -51,9 +53,9 @@ public class ContactHelper extends  HelperBase{
 
 
     private void deleteContact() {
-        click(By.name("selected[]"));
         click(By.id("content"));
         click(By.xpath("//input[@value=\'Delete\']"));
+        click(By.linkText("home"));
     }
 
 
@@ -79,4 +81,20 @@ public class ContactHelper extends  HelperBase{
         click(By.xpath("//img[@alt='Edit']"));
     }
 
+    public int getCount() {
+        return manager.driver.findElements(By.name("selected[]")).size();
+
+    }
+
+    public void removeAllContacts() {
+        selectAllContact();
+        deleteContact();
+    }
+
+    private void selectAllContact() {
+        var checkboxes = manager.driver.findElements(By.name("selected[]"));
+        for (var checkbox :checkboxes){
+            checkbox.click();
+        }
+    }
 }

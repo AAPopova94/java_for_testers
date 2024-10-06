@@ -1,6 +1,5 @@
-package tests;
+package manager;
 
-import manager.ApplicationManager;
 import org.junit.jupiter.api.BeforeEach;
 
 ///если захочу изменить условия -надо будет в скобках методов прописать имена переменных, как в CreateGoup
