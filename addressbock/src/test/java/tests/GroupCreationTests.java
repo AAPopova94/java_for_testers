@@ -4,41 +4,38 @@ import Model.GroupData;
 import manager.TestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-
-public class GroupCreationTests extends TestBase { //extends manager.TestBase -  наследование класса
-
-    @Test
-    public void canCreateGroup() {
-        int groupCount = app.groups().getCount();
-        app.groups().CreateGroup(new GroupData("name", "1", "2")); //мы вынесли этот код с помощью рефактор - пулл мемберс ап
-        int newGroupCount = app.groups().getCount();
-        Assertions.assertEquals(groupCount +1, newGroupCount);
-
-    }
+import java.util.ArrayList;
+import java.util.List;
 
 
 
-    @Test
-    public void canCreateGroupWithEmptyName() {
-        app.groups().CreateGroup(new GroupData());//мы вынесли этот код с помощью рефактор - пулл мемберс ап
-    }
+public class GroupCreationTests extends TestBase {
 
-    @Test
-    public void canCreateGroupWithNameOnly() {
-        app.groups().CreateGroup(new GroupData().withName("Some name"));//конструкция позволяет вызвать конкретный заполненный параметр из метода с пустыми параметрами
-    }
-    @Test
-    public void canCreateMultipleGroup() {
-        int n = 5;
-        int groupCount = app.groups().getCount();
 
+    public static List<GroupData> groupProvider() {
+        var result = new ArrayList<GroupData>(List.of(
+                new GroupData(),
+                new GroupData().withName("Some name"),
+                new GroupData("group name", "group Header", "group Footer"),
+                new GroupData("groupname", "123","456")));
         int i;
-        for (i = 0; i < n; i++){
-            app.groups().CreateGroup(new GroupData(randomString(i), "1", "2")); //мы вынесли этот код с помощью рефактор - пулл мемберс ап
+        for (i = 0; i < 5; i++){
+            result.add(new GroupData(randomString(i), randomString(i), randomString(i))); //мы вынесли этот код с помощью рефактор - пулл мемберс ап
         }
+        return  result;
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("groupProvider")
+    public void canCreateMultipleGroup(GroupData group) {
+        int groupCount = app.groups().getCount();
+        app.groups().CreateGroup(group); //мы вынесли этот код с помощью рефактор - пулл мемберс ап
         int newGroupCount = app.groups().getCount();
-        Assertions.assertEquals(groupCount + 5, newGroupCount);
+        Assertions.assertEquals(groupCount + 1, newGroupCount);
 
     }
 }
