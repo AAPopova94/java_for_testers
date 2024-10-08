@@ -16,31 +16,19 @@ import java.util.stream.Stream;
 public class CreateNewContact extends TestBase {
 
   public static List<ContactData> contactProvider() {
-    var result = new ArrayList<ContactData>(List.of(
-            new ContactData(),
-            new ContactData("Jon", "travolta", "milk", "900000000","Bell")),
+   var result = new ArrayList<ContactData>(List.of(
+        new ContactData(),
+           new ContactData("Jon", "travolta", "milk", "900000000","Bell"),
             new ContactData().withName("Anna")));
+
     int i;
     for (i = 0; i < 5; i++){
-      result.add(new ContactData(randomString(i), randomString(i), randomString(i), randomString(i)));
+      result.add(new ContactData(randomString(i), randomString(i), randomString(i), randomString(i),randomString(i)));
     }
     return result;
   }
 
-  @Test
-  public void CreateNewContact() {
-    int contactCount = app.contacts().getCount();
-    app.contacts().createContact(new ContactData("Jon", "travolta", "milk", "900000000","Bell"));
-    int newContactCount = app.contacts().getCount();
-    Assertions.assertEquals(contactCount + 1, newContactCount);
-  }
-
-
-  @Test
-  public void canCreateNewContactWithOnlyName() {
-    app.contacts().createContact(new ContactData().withName("Anna"));
-
-  }
+  
 
   @ParameterizedTest
   @MethodSource("contactProvider")
