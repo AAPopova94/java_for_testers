@@ -3,6 +3,11 @@ package manager;
 import Model.GroupData;
 import org.openqa.selenium.By;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.lang.String.format;
+
 public class GroupHelper extends HelperBase{
 
     public GroupHelper(ApplicationManager manager){
@@ -15,9 +20,9 @@ public class GroupHelper extends HelperBase{
         }
     }
 
-    public void RemoveGroup() {
+    public void RemoveGroup(GroupData group) {
         OpenGroupPage();
-        selectGroup();
+        selectGroup(group);
         deleteGroups();
         returnToGroupsPage();
 
@@ -33,7 +38,7 @@ public class GroupHelper extends HelperBase{
 
     public void modifyGroup(GroupData modifiedGroup) {
         OpenGroupPage();
-        selectGroup();
+        selectGroup(null);
         initGroupModification();
         fillGroupForm(modifiedGroup);
         submitGroupModification();
@@ -75,8 +80,8 @@ public class GroupHelper extends HelperBase{
         click(By.name("edit"));
     }
 
-    private void selectGroup() {
-        click(By.name("selected[]"));
+    private void selectGroup(GroupData group) {
+        click(By.cssSelector(String.format("input[value='%s']", group.id())));
 
     }
 
@@ -96,5 +101,18 @@ public class GroupHelper extends HelperBase{
         for (var checkbox : checkboxes) {
             checkbox.click();
         }
+    }
+
+    public List<GroupData> getList() {
+        var groups = new ArrayList<GroupData>();
+        var spans = manager.driver.findElements(By.cssSelector("span.group"));//так можно искать элементы по имени (тут - спан групп)
+        for (var span : spans){
+            var name = span.getText();
+            var checkbox = span.findElement(By.name("selected[]"));//ищем все чекбоксы по элементу Селект в спане Групп)
+            var id = checkbox.getAttribute("value"); // тут ищем ИД у всех найденных выше атрибутово со значеием value (А там на сайте имена зашиты)
+            groups.add(new GroupData().withId(id).withName(name));
+
+        }
+        return groups;
     }
 }

@@ -1,7 +1,11 @@
 package manager;
 
 import Model.ContactData;
+import Model.GroupData;
 import org.openqa.selenium.By;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends  HelperBase{
 
@@ -20,13 +24,13 @@ public class ContactHelper extends  HelperBase{
 
     }
 
-    public void removeContact() {
-        chooseContact();
+    public void removeContact(ContactData contact) {
+        chooseContact(contact);
         deleteContact();
     }
 
-    private void chooseContact() {
-        click(By.name("selected[]"));
+    private void chooseContact(ContactData contact) {
+        click(By.cssSelector(String.format("input[value='%s']", contact.id())));
     }
 
     public void modifyContact(ContactData modifiedContact) {
@@ -96,5 +100,18 @@ public class ContactHelper extends  HelperBase{
         for (var checkbox :checkboxes){
             checkbox.click();
         }
+    }
+
+    public List<ContactData> getList() {
+        var contacts = new ArrayList<ContactData>();
+        var tds = manager.driver.findElements(By.cssSelector("td.center"));//так можно искать элементы по имени (тут - спан групп)
+        for (var td : tds){
+            var name = td.getText();
+            var checkbox = td.findElement(By.name("selected[]"));//ищем все чекбоксы по элементу Селект в спане Групп)
+            var id = checkbox.getAttribute("value"); // тут ищем ИД у всех найденных выше атрибутово со значеием value (А там на сайте имена зашиты)
+            contacts.add(new ContactData().withId(id).withName(name));
+
+        }
+        return contacts;
     }
 }
