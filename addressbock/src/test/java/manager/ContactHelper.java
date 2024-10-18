@@ -104,10 +104,10 @@ public class ContactHelper extends  HelperBase{
 
     public List<ContactData> getList() {
         var contacts = new ArrayList<ContactData>();
-        var tds = manager.driver.findElements(By.cssSelector("td.center"));//так можно искать элементы по имени (тут - спан групп)
-        for (var td : tds){
-            var name = td.getText();
-            var checkbox = td.findElement(By.name("selected[]"));//ищем все чекбоксы по элементу Селект в спане Групп)
+        var trs = manager.driver.findElements(By.name("entry"));//так можно искать элементы по имени (тут - спан групп)
+        for (var tr : trs){
+            var name = tr.getText();
+            var checkbox = tr.findElement(By.name("selected[]"));//ищем все чекбоксы по элементу Селект в спане Групп)
             var id = checkbox.getAttribute("value"); // тут ищем ИД у всех найденных выше атрибутово со значеием value (А там на сайте имена зашиты)
             contacts.add(new ContactData().withId(id).withName(name));
 
