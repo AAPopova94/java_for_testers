@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -31,10 +32,17 @@ public class GroupCreationTests extends TestBase {
     @ParameterizedTest
     @MethodSource("groupProvider")
     public void canCreateMultipleGroup(GroupData group) {
-        int groupCount = app.groups().getCount();
+        var oldGroups = app.groups().getList();
         app.groups().CreateGroup(group); //мы вынесли этот код с помощью рефактор - пулл мемберс ап
-        int newGroupCount = app.groups().getCount();
-        Assertions.assertEquals(groupCount + 1, newGroupCount);
+        var newGroups = app.groups().getList();
+        Comparator<GroupData> compareById = (o1, o2) -> {//заложенная функция .sort((o1, o2) сортирует списки
+            return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));//то что в скобках так расписывается, потому что у нас не числа, а строки
+        };
+        newGroups.sort(compareById);
+        var expectedList = new ArrayList<>(oldGroups);
+        expectedList.add(group.withId(newGroups.get(newGroups.size() -1).id()));
+        expectedList.sort(compareById); // отсортировали старый список по ИД, чтоб цифры совпали
+        Assertions.assertEquals(newGroups, expectedList);
 
     }
 }

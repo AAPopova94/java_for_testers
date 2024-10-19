@@ -36,9 +36,9 @@ public class GroupHelper extends HelperBase{
         returnToGroupsPage();
     }
 
-    public void modifyGroup(GroupData modifiedGroup) {
+    public void modifyGroup(GroupData group, GroupData modifiedGroup) {
         OpenGroupPage();
-        selectGroup(null);
+        selectGroup(group);
         initGroupModification();
         fillGroupForm(modifiedGroup);
         submitGroupModification();

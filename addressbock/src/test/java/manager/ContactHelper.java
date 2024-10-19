@@ -1,7 +1,6 @@
 package manager;
 
 import Model.ContactData;
-import Model.GroupData;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class ContactHelper extends  HelperBase{
         click(By.cssSelector(String.format("input[value='%s']", contact.id())));
     }
 
-    public void modifyContact(ContactData modifiedContact) {
+    public void modifyContact(ContactData modifiedContact, ContactData contact) {
         // OpenContactPage();
         initcontactModification();
         fillConactForm(modifiedContact);
