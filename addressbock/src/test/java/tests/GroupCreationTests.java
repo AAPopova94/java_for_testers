@@ -40,7 +40,7 @@ public class GroupCreationTests extends TestBase {
         };
         newGroups.sort(compareById);
         var expectedList = new ArrayList<>(oldGroups);
-        expectedList.add(group.withId(newGroups.get(newGroups.size() -1).id()));
+        expectedList.add(group.withId(newGroups.get(newGroups.size() -1).id()).withFooter("").withHeader(""));
         expectedList.sort(compareById); // отсортировали старый список по ИД, чтоб цифры совпали
         Assertions.assertEquals(newGroups, expectedList);
 

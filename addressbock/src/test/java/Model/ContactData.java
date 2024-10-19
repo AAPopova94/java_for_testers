@@ -9,17 +9,20 @@ public record ContactData(String id, String middlename, String lastname, String 
         return new ContactData(id, this.middlename, this.lastname,this.nickname,this.mobile,this.firstname);
     }
 
-    public ContactData withName(String lastname) {
+    public ContactData withLastName(String lastname) {
         return new ContactData(this.id, this.middlename, lastname,this.nickname,this.mobile,this.firstname);
     }
     public ContactData withMiddleName(String middlename) {
         return new ContactData(this.id, middlename, this.lastname,this.nickname,this.mobile,this.firstname);
     }
-    public ContactData withNickName(String lastname) {
-        return new ContactData(this.id, this.middlename, lastname,nickname,this.mobile,this.firstname);
+    public ContactData withNickName(String nickname) {
+        return new ContactData(this.id, this.middlename, this.lastname, nickname,this.mobile,this.firstname);
     }
     public ContactData withMobile(String mobile) {
         return new ContactData(this.id, this.middlename, this.lastname,this.nickname,mobile,this.firstname);
+    }
+    public ContactData withFirstName(String firstname) {
+        return new ContactData(this.id, this.middlename, this.lastname,this.nickname,this.mobile,firstname);
     }
 
 

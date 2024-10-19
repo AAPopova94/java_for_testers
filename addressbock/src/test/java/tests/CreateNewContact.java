@@ -15,12 +15,12 @@ public class CreateNewContact extends TestBase {
    var result = new ArrayList<ContactData>(List.of(
         new ContactData(),
            new ContactData("", "Jon", "travolta", "milk", "900000000","Bell"),
-            new ContactData().withName("Anna")));
+            new ContactData().withLastName("Anna")));
 
     int i;
     for (i = 0; i < 5; i++){
       result.add(new ContactData()
-              .withName(randomString(i))
+              .withLastName(randomString(i))
               .withMiddleName(randomString(i))
               .withNickName(randomString(i))
               .withMobile(randomString(i)));

@@ -104,6 +104,7 @@ public class GroupHelper extends HelperBase{
     }
 
     public List<GroupData> getList() {
+        OpenGroupPage();
         var groups = new ArrayList<GroupData>();
         var spans = manager.driver.findElements(By.cssSelector("span.group"));//так можно искать элементы по имени (тут - спан групп)
         for (var span : spans){
