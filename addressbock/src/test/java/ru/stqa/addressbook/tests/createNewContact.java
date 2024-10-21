@@ -1,6 +1,9 @@
 package ru.stqa.addressbook.tests;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.stqa.addressbook.Model.ContactData;
+import ru.stqa.addressbook.Model.GroupData;
 import ru.stqa.addressbook.common.CommonFunctions;
 import ru.stqa.addressbook.manager.TestBase;
 import org.junit.jupiter.api.Assertions;
@@ -8,28 +11,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class createNewContact extends TestBase {
 
-  public static List<ContactData> contactProvider() {
-   var result = new ArrayList<ContactData>(List.of(
-        new ContactData(),
-           new ContactData("", "Jon", "travolta", "milk", "900000000","Bell","src/test/resources/images/hd1.png"),
-            new ContactData().withLastName("Anna")));
+  public static List<ContactData> contactProvider() throws IOException {
+   var result = new ArrayList<ContactData>();
 
-    int i;
-    for (i = 0; i < 5; i++){
-      result.add(new ContactData()
-              .withLastName(CommonFunctions.randomString(i))
-              .withMiddleName(CommonFunctions.randomString(i))
-              .withNickName(CommonFunctions.randomString(i))
-              .withMobile(CommonFunctions.randomString(i))
-              .withPhoto(""));
-    }
-    return result;
+      ObjectMapper mapper = new ObjectMapper();
+      var value = mapper.readValue(new File("contacts.json"), new TypeReference<List<ContactData>>(){});
+      result.addAll(value);
+      return  result;
   }
+  
 
 
 

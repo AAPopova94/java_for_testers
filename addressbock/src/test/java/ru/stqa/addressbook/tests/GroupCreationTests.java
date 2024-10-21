@@ -1,5 +1,7 @@
 package ru.stqa.addressbook.tests;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.stqa.addressbook.Model.GroupData;
 import ru.stqa.addressbook.common.CommonFunctions;
 import ru.stqa.addressbook.manager.TestBase;
@@ -7,6 +9,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -16,16 +20,11 @@ import java.util.List;
 public class GroupCreationTests extends TestBase {
 
 
-    public static List<GroupData> groupProvider() {
-        var result = new ArrayList<GroupData>(List.of(
-                new GroupData(),
-                new GroupData().withName("Some name"),
-                new GroupData("", "group name", "group Header", "group Footer"),
-                new GroupData("", "groupname", "123","456")));
-        int i;
-        for (i = 0; i < 5; i++){
-            result.add(new GroupData().withName(CommonFunctions.randomString(i)).withFooter(CommonFunctions.randomString(i)).withHeader(CommonFunctions.randomString(i))); //мы вынесли этот код с помощью рефактор - пулл мемберс ап
-        }
+    public static List<GroupData> groupProvider() throws IOException {
+        var result = new ArrayList<GroupData>();
+        ObjectMapper mapper = new ObjectMapper();
+        var value = mapper.readValue(new File("groups.json"), new TypeReference<List<GroupData>>(){});
+        result.addAll(value);
         return  result;
     }
 
