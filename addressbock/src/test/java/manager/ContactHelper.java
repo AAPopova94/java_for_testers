@@ -17,7 +17,7 @@ public class ContactHelper extends  HelperBase{
 
     public void createContact(ContactData contact) {
         openPageCreateContact();
-        fillConactForm(contact);
+        fillContactForm(contact);
         clickForCreate();
         returnToContactPage();
 
@@ -34,8 +34,8 @@ public class ContactHelper extends  HelperBase{
 
     public void modifyContact(ContactData modifiedContact, ContactData contact) {
         // OpenContactPage();
-        initcontactModification();
-        fillConactForm(modifiedContact);
+        initcontactModification(contact);
+        fillContactForm(modifiedContact);
         submitContactModification();
         returnToContactPage();
     }
@@ -71,7 +71,10 @@ public class ContactHelper extends  HelperBase{
         click(By.name("update"));
     }
 
-    private void fillConactForm(ContactData contact) {
+    private void fillContactForm(ContactData contact) {
+        if (!"".equals(contact.photo())){
+            attach(By.name("photo"), contact.photo());
+        }
         type(By.name("firstname"), contact.firstname());
         type(By.name("middlename"), contact.middlename());
         type(By.name("lastname"), contact.lastname());
@@ -80,7 +83,7 @@ public class ContactHelper extends  HelperBase{
     }
 
 
-    private void initcontactModification() {
+    private void initcontactModification(ContactData contact) {
         click(By.xpath("//img[@alt='Edit']"));
     }
 

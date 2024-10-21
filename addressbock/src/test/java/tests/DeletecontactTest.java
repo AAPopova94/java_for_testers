@@ -17,7 +17,7 @@ public class DeletecontactTest extends TestBase {
   @Test
   public void deletecontact() throws InterruptedException {
     if (app.contacts().getCount()== 0){
-      app.contacts().createContact(new ContactData("", "Jon", "travolta", "milk", "900000000","Bell"));
+      app.contacts().createContact(new ContactData("", "Jon", "travolta", "milk", "900000000","Bell",""));
     }
     var oldContact = app.contacts().getList();
     var rnd = new Random();
@@ -33,7 +33,7 @@ public class DeletecontactTest extends TestBase {
   @Test
   void removeAllContact(){
     if (app.contacts().getCount()== 0){
-      app.contacts().createContact(new ContactData("", "Jon", "travolta", "milk", "900000000","Bell"));
+      app.contacts().createContact(new ContactData("", "Jon", "travolta", "milk", "900000000","Bell",""));
     }
     app.contacts().removeAllContacts();
     Assertions.assertEquals(0, app.contacts().getCount());
