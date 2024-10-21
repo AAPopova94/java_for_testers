@@ -1,8 +1,7 @@
-package manager;
+package ru.stqa.addressbook.manager;
 
 import org.openqa.selenium.By;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class HelperBase {

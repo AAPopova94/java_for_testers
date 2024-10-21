@@ -1,7 +1,8 @@
-package tests;
+package ru.stqa.addressbook.tests;
 
-import Model.GroupData;
-import manager.TestBase;
+import ru.stqa.addressbook.Model.GroupData;
+import ru.stqa.addressbook.common.CommonFunctions;
+import ru.stqa.addressbook.manager.TestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -23,7 +24,7 @@ public class GroupCreationTests extends TestBase {
                 new GroupData("", "groupname", "123","456")));
         int i;
         for (i = 0; i < 5; i++){
-            result.add(new GroupData().withName(randomString(i)).withFooter(randomString(i)).withHeader(randomString(i))); //мы вынесли этот код с помощью рефактор - пулл мемберс ап
+            result.add(new GroupData().withName(CommonFunctions.randomString(i)).withFooter(CommonFunctions.randomString(i)).withHeader(CommonFunctions.randomString(i))); //мы вынесли этот код с помощью рефактор - пулл мемберс ап
         }
         return  result;
     }

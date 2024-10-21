@@ -1,6 +1,6 @@
-package manager;
+package ru.stqa.addressbook.manager;
 
-import Model.ContactData;
+import ru.stqa.addressbook.Model.ContactData;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;

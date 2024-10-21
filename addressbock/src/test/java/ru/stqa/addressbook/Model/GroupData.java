@@ -1,4 +1,4 @@
-package Model;
+package ru.stqa.addressbook.Model;
 
 public record GroupData(String id, String name, String header, String footer) {
 

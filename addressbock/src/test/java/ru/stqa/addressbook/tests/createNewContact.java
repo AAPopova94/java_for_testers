@@ -1,7 +1,8 @@
-package tests;
+package ru.stqa.addressbook.tests;
 
-import Model.ContactData;
-import manager.TestBase;
+import ru.stqa.addressbook.Model.ContactData;
+import ru.stqa.addressbook.common.CommonFunctions;
+import ru.stqa.addressbook.manager.TestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,10 +22,10 @@ public class createNewContact extends TestBase {
     int i;
     for (i = 0; i < 5; i++){
       result.add(new ContactData()
-              .withLastName(randomString(i))
-              .withMiddleName(randomString(i))
-              .withNickName(randomString(i))
-              .withMobile(randomString(i))
+              .withLastName(CommonFunctions.randomString(i))
+              .withMiddleName(CommonFunctions.randomString(i))
+              .withNickName(CommonFunctions.randomString(i))
+              .withMobile(CommonFunctions.randomString(i))
               .withPhoto(""));
     }
     return result;

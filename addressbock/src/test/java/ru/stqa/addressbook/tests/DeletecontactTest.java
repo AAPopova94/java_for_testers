@@ -1,13 +1,11 @@
-package tests;
+package ru.stqa.addressbook.tests;
 
-import Model.ContactData;
-import Model.GroupData;
-import manager.TestBase;
+import ru.stqa.addressbook.Model.ContactData;
+import ru.stqa.addressbook.manager.TestBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 

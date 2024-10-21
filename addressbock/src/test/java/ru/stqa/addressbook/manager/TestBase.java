@@ -1,9 +1,8 @@
-package manager;
+package ru.stqa.addressbook.manager;
 
 import org.junit.jupiter.api.BeforeEach;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
 
@@ -19,17 +18,6 @@ public class TestBase {
         }
         app.init(System.getProperty("browser", "firefox"));
 
-    }
-
-    //возвращает рандомное имя
-    public static  String randomString(int n){
-        var rnd = new Random();
-        var result = "";
-        for (int i =0; i < n; i++){
-            result = result +(char) ('a' + rnd.nextInt(26));//преобразовали рандомное заполнение данных
-        }
-
-        return result;
     }
 
 
