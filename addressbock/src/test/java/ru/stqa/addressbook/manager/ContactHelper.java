@@ -108,7 +108,7 @@ public class ContactHelper extends  HelperBase{
         var contacts = new ArrayList<ContactData>();
         var trs = manager.driver.findElements(By.name("entry"));//так можно искать элементы по имени (тут - спан групп)
         for (var tr : trs){
-            var name = tr.getText();
+            var name = tr.findElements(By.tagName("td")).get(1).getText();
             var checkbox = tr.findElement(By.name("selected[]"));//ищем все чекбоксы по элементу Селект в спане Групп)
             var id = checkbox.getAttribute("value"); // тут ищем ИД у всех найденных выше атрибутово со значеием value (А там на сайте имена зашиты)
             contacts.add(new ContactData().withId(id).withLastName(name));
