@@ -13,6 +13,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +23,13 @@ public class createNewContact extends TestBase {
   public static List<ContactData> contactProvider() throws IOException {
    var result = new ArrayList<ContactData>();
 
+      var json = Files.readString(Paths.get("contacts.json"));
       ObjectMapper mapper = new ObjectMapper();
-      var value = mapper.readValue(new File("contacts.json"), new TypeReference<List<ContactData>>(){});
+      var value = mapper.readValue(json, new TypeReference<List<ContactData>>(){});
       result.addAll(value);
       return  result;
   }
-  
+
 
 
 
